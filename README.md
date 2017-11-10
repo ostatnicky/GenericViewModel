@@ -9,7 +9,7 @@ This demo app is about the generic view model that contains array of items and t
 
 `GenericViewModel` is defined like this:
 
-```
+```swift
 class GenericViewModel<T, S: GenericTableViewCell<T>>: NSObject, UITableViewDataSource {
     
     var items: [T]?
@@ -40,7 +40,7 @@ class GenericViewModel<T, S: GenericTableViewCell<T>>: NSObject, UITableViewData
 
 So only what you need to define new view model is this:
 
-```
+```swift
 class SkillsViewModel: GenericViewModel<Skill, SkillCell> {
     
     func configure(withPerson person: Person?) {
