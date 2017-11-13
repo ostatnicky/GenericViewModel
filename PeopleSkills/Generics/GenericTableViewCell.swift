@@ -8,10 +8,7 @@
 
 import UIKit
 
-class GenericTableViewCell<T>: UITableViewCell {
-    
-    func configure(withItem item: T?) {
-        
-    }
-    
+protocol GenericTableViewCell {
+    associatedtype ModelType
+    func configure(withItem item: ModelType)
 }

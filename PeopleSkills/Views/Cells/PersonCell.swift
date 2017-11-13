@@ -8,18 +8,14 @@
 
 import UIKit
 
-class PersonCell: GenericTableViewCell<Person> {
+class PersonCell: UITableViewCell, GenericTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func configure(withItem item: Person?) {
-        guard let person = item else {
-            textLabel?.text = nil
-            return
-        }
-        textLabel?.text = "\(person.name) \(person.surname)"
+    func configure(withItem item: Person) {
+        textLabel?.text = "\(item.name) \(item.surname)"
     }
     
 }

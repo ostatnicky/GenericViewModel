@@ -8,18 +8,14 @@
 
 import UIKit
 
-class SkillCell: GenericTableViewCell<Skill> {
+class SkillCell: UITableViewCell, GenericTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func configure(withItem item: Skill?) {
-        guard let skill = item else {
-            textLabel?.text = nil
-            return
-        }
-        textLabel?.text = skill.name
+    func configure(withItem item: Skill) {
+        textLabel?.text = item.name
     }
     
 }

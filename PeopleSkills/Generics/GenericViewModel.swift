@@ -8,35 +8,34 @@
 
 import UIKit
 
-class GenericViewModel<T, S: GenericTableViewCell<T>>: NSObject, UITableViewDataSource {
+class GenericViewModel<ModelType, CellType: GenericTableViewCell & UITableViewCell>: NSObject, UITableViewDataSource where ModelType == CellType.ModelType {
     
-    var items: [T]?
+    var items: [ModelType] = []
     
-    func setItems(items: [T]?) {
+    func setItems(items: [ModelType]) {
         self.items = items
     }
     
-    func item(atIndexPath indexPath: IndexPath) -> T? {
-        return items?[indexPath.row] ?? nil
+    func item(atIndexPath indexPath: IndexPath) -> ModelType {
+        return items[indexPath.row]
     }
     
-    func setItem(_ item: T, forIndexPath indexPath: IndexPath) {
-        items?[indexPath.row] = item
+    func setItem(_ item: ModelType, forIndexPath indexPath: IndexPath) {
+        items[indexPath.row] = item
     }
     
     func hasData() -> Bool {
-        guard let items = items else { return false }
         return items.count > 0
     }
     
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items?.count ?? 0
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as S
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CellType
         cell.configure(withItem: item(atIndexPath: indexPath))
         return cell
     }
