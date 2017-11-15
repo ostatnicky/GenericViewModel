@@ -10,16 +10,16 @@ This demo app is about the generic view model that contains array of items and t
 `GenericViewModel` is defined like this:
 
 ```swift
-class GenericViewModel<T, S: GenericTableViewCell<T>>: NSObject, UITableViewDataSource {
+class GenericViewModel<ModelType, CellType: UITableViewCell & Configurable>: NSObject, UITableViewDataSource where ModelType == CellType.ModelType {
     
-    var items: [T]?
+    var items: [ModelType] = []
     
-    func setItems(items: [T]?) {
+    func setItems(items: [ModelType]) {
         self.items = items
     }
     
-    func item(atIndexPath indexPath: IndexPath) -> T? {
-        return items?[indexPath.row] ?? nil
+    func item(atIndexPath indexPath: IndexPath) -> ModelType {
+        return items[indexPath.row]
     }
     
     ...
@@ -27,11 +27,11 @@ class GenericViewModel<T, S: GenericTableViewCell<T>>: NSObject, UITableViewData
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items?.count ?? 0
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as S
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CellType
         cell.configure(withItem: item(atIndexPath: indexPath))
         return cell
     }
