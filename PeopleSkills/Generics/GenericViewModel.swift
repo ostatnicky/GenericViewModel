@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenericViewModel<ModelType, CellType: GenericTableViewCell & UITableViewCell>: NSObject, UITableViewDataSource where ModelType == CellType.ModelType {
+class GenericViewModel<ModelType, CellType: UITableViewCell & Configurable>: NSObject, UITableViewDataSource where ModelType == CellType.ModelType {
     
     var items: [ModelType] = []
     

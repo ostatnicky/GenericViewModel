@@ -1,5 +1,5 @@
 //
-//  GenericTableViewCell.swift
+//  Configurable.swift
 //  PeopleSkills
 //
 //  Created by Jiri Ostatnicky on 09/11/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GenericTableViewCell {
+protocol Configurable {
     associatedtype ModelType
     func configure(withItem item: ModelType)
 }

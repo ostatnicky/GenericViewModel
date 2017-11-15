@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PersonCell: UITableViewCell, GenericTableViewCell {
+class PersonCell: UITableViewCell, Configurable {
 
     override func awakeFromNib() {
         super.awakeFromNib()
